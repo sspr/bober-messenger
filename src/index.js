@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import Messenger from './App';
+import Messenger from './Messenger';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(<Messenger />, document.getElementById('root'));

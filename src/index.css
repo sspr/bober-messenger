@@ -1,5 +1,5 @@
 body {
-  margin: 10px;
+  margin: 2vh;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
@@ -12,40 +12,51 @@ code {
     monospace;
 }
 
-.user1Window {
-  min-height: 90vh;
+.messages-window{
+  min-height: 92vh;
+}
+
+.user-1-window {
   width: 45%;
   padding-right: 5%;
-  position: reltive;
   display: inline-block;
 }
 
-.user2Window {
-  min-height: 90vh;
+.user-2-window {
+  box-sizing: border-box;
   width: 45%;
-  padding-left: 4%;
-  position: reltive;
+  padding-left: 5%;
   display: inline-block;
   border-left: 1px solid #000;
 }
 
-.userForm {
-  position: fixed;
-  bottom: 10px;
+.user-form{
+  box-sizing: border-box;
+  min-height: 2vh;
 }
 
-.user1 {
+.user-form input[type="text"]{
+  width: 80%;
+  box-sizing: border-box;
+}
+
+.user-form input[type="submit"]{
+  width: 20%;
+  box-sizing: border-box;
+}
+
+.userOne {
   text-align: left;
 }
 
-.user2 {
+.userTwo {
   text-align: right;
 }
 
-.user2Window .user1{
+.user-2-window .userOne{
   text-align: right;
 }
 
-.user2Window .user2{
+.user-2-window .userTwo{
   text-align: left;
 }
