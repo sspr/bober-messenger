@@ -1,64 +1,31 @@
 import React from 'react';
+import Window from './Window';
 
 class Messenger extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { messages: [],
-      key: 0,
-      userOne: '',
-      userTwo: ''
+    this.state = {
+      messages: []
     };
   }
-  
-  handleSubmit = (event) => {
-    event.preventDefault();
 
-    const name = event.target.name;
-    
-    if(this.state[name] !== ''){
-      const arrayOfMessages = this.state.messages;
+  handleSubmit = (name, message, key) => {
+    if (message) {
+      const messages = [...this.state.messages];
 
-      arrayOfMessages.push({ user: [name], message: this.state[name], key: this.state.key });
-      this.setState({ messages: arrayOfMessages, [name]: '', key: this.state.key + 1 });
+      messages.push({ user: name, message: message, key: key });
+      this.setState({ messages });
     }
   }
-  
-  handleChange = (event) => {
-    const name = event.target.name;
-    
-    this.setState({ [name]: event.target.value });
-  }
-  
-  renderMessage = (state) => {
-    const messagesHTML = this.state.messages.map((allMessages) =>
-    <p key={allMessages.key} className={allMessages.user}>
-      {allMessages.message}
-    </p>
-    );
-
-    return messagesHTML;
-  }   
 
   render() {
     return (
       <div>
         <div className="user-1-window">
-          <div className="messages-window">
-            {this.renderMessage()}
-          </div>
-          <form name="userOne" className="user-form" onSubmit={this.handleSubmit}>
-            <input name='userOne' type='text' value={this.state.userOne} onChange={this.handleChange}/>
-            <input type='submit'/>
-          </form>
+          <Window messages={this.state.messages} onSubmit={this.handleSubmit} user='userOne' />
         </div>
         <div className="user-2-window">
-          <div className="messages-window">
-            {this.renderMessage()}
-          </div>
-          <form name="userTwo" className="user-form" onSubmit={this.handleSubmit}>
-            <input name='userTwo' type='text' value={this.state.userTwo} onChange={this.handleChange}/>
-            <input type='submit'/>
-          </form>
+          <Window messages={this.state.messages} onSubmit={this.handleSubmit} user='userTwo' />
         </div>
       </div>
     );
