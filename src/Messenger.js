@@ -9,11 +9,11 @@ class Messenger extends React.Component {
     };
   }
 
-  handleSubmit = (name, message, key) => {
+  handleSubmit = (name, message) => {
     if (message) {
       const messages = [...this.state.messages];
 
-      messages.push({ user: name, message: message, key: key });
+      messages.push({ user: name, message });
       this.setState({ messages });
     }
   }

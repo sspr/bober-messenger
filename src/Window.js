@@ -4,31 +4,31 @@ class Window extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            userOne: '',
-            userTwo: '',
-            key: this.props.user
+            text: ''
         };
     }
 
     handlePress = (event) => {
-        event.preventDefault();
-
-        this.props.onSubmit(event.target.name, this.state[this.props.user], this.state.key)
-        this.setState({ key: this.state.key + 1, [this.props.user]: '' });
+        this.props.onSubmit(event.target.name, this.state.text)
+        this.setState({ text: '' });
     }
 
     renderMessages = () => {
-        const messagesHTML = this.props.messages.map((allMessages) =>
-            <p key={allMessages.key} className={allMessages.user}>
-                {allMessages.message}
+        const messagesHTML = this.props.messages.map((message, index) =>
+            <p key={index} className={message.user}>
+                {message.message}
             </p>
         );
 
         return messagesHTML;
     }
 
-    handleChange = ({ target: { name, value } }) => {
-        this.setState({ [name]: value });
+    handleChange = ({ target: { value } }) => {
+        this.setState({ text: value });
+    }
+
+    handleEnterUp = (event) => {
+        if (event.keyCode === 13) this.handlePress(event);
     }
 
     render() {
@@ -38,7 +38,7 @@ class Window extends React.Component {
                     {this.renderMessages()}
                 </div>
                 <div className="user-form">
-                    <input name={this.props.user} type='text' value={this.state[this.props.user]} onChange={this.handleChange} />
+                    <input name={this.props.user} type='text' value={this.state.text} onChange={this.handleChange} onKeyUp={this.handleEnterUp} />
                     <input name={this.props.user} type='submit' onClick={this.handlePress} />
                 </div>
             </div>
