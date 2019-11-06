@@ -9,19 +9,15 @@ class Window extends React.Component {
     }
 
     handlePress = (event) => {
-        this.props.onSubmit(event.target.name, this.state.text)
+        this.props.onSubmit(this.props.user, this.state.text)
         this.setState({ text: '' });
     }
 
-    renderMessages = () => {
-        const messagesHTML = this.props.messages.map((message, index) =>
+    renderMessages = () => this.props.messages.map((message, index) =>
             <p key={index} className={message.user}>
                 {message.message}
             </p>
         );
-
-        return messagesHTML;
-    }
 
     handleChange = ({ target: { value } }) => {
         this.setState({ text: value });
@@ -38,8 +34,8 @@ class Window extends React.Component {
                     {this.renderMessages()}
                 </div>
                 <div className="user-form">
-                    <input name={this.props.user} type='text' value={this.state.text} onChange={this.handleChange} onKeyUp={this.handleEnterUp} />
-                    <input name={this.props.user} type='submit' onClick={this.handlePress} />
+                    <input type='text' value={this.state.text} onChange={this.handleChange} onKeyUp={this.handleEnterUp} />
+                    <input type='submit' onClick={this.handlePress} />
                 </div>
             </div>
         );
