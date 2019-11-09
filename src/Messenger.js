@@ -16,16 +16,16 @@ class Messenger extends React.Component {
       messages.push({ user: name, message });
       this.setState({ messages });
     }
-  }
+  };
 
   render() {
     return (
       <div>
         <div className="user-1-window">
-          <Window messages={this.state.messages} onSubmit={this.handleSubmit} user='userOne' />
+          <Window messages={this.state.messages} onSubmit={this.handleSubmit} user="userOne" />
         </div>
         <div className="user-2-window">
-          <Window messages={this.state.messages} onSubmit={this.handleSubmit} user='userTwo' />
+          <Window messages={this.state.messages} onSubmit={this.handleSubmit} user="userTwo" />
         </div>
       </div>
     );
