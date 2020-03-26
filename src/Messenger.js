@@ -1,11 +1,12 @@
 import React from 'react';
-import Window from './Window';
+
+import { Wrapper } from './Wrapper';
 
 class Messenger extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      messages: []
+      messages: [],
     };
   }
 
@@ -21,12 +22,7 @@ class Messenger extends React.Component {
   render() {
     return (
       <div>
-        <div className="user-1-window">
-          <Window messages={this.state.messages} onSubmit={this.handleSubmit} user="userOne" />
-        </div>
-        <div className="user-2-window">
-          <Window messages={this.state.messages} onSubmit={this.handleSubmit} user="userTwo" />
-        </div>
+        <Wrapper messages={this.state.messages} onSubmit={this.handleSubmit} />
       </div>
     );
   }
