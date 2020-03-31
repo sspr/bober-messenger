@@ -1,20 +1,18 @@
 import React from 'react';
+import { MessagesContext } from './MessagesContext';
 
 class Window extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      text: '',
-    };
-  }
+  state = {
+    text: '',
+  };
 
-  handlePress = event => {
-    this.props.onSubmit(this.props.user, this.state.text);
+  handlePress = () => {
+    this.context.handleSubmit(this.props.user, this.state.text);
     this.setState({ text: '' });
   };
 
   renderMessages = () =>
-    this.props.messages.map((message, index) => (
+    this.context.messages.map((message, index) => (
       <p key={index} className={message.user}>
         {message.message}
       </p>
@@ -30,15 +28,22 @@ class Window extends React.Component {
 
   render() {
     return (
-      <div>
-        <div className="messages-window">{this.renderMessages()}</div>
-        <div className="user-form">
-          <input type="text" value={this.state.text} onChange={this.handleChange} onKeyUp={this.handleEnterUp} />
-          <input type="submit" onClick={this.handlePress} />
+      <div className="messages">
+        <div className="messages__window">{this.renderMessages()}</div>
+        <div className="messages__form">
+          <input
+            className="messages__form--text"
+            type="text"
+            value={this.state.text}
+            onChange={this.handleChange}
+            onKeyUp={this.handleEnterUp}
+          />
+          <input className="messages__form--submit" type="submit" onClick={this.handlePress} />
         </div>
       </div>
     );
   }
 }
+Window.contextType = MessagesContext;
 
 export default Window;

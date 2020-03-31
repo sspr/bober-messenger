@@ -1,15 +1,14 @@
 import React from 'react';
-
 import Window from './Window';
 
-export function Wrapper({ messages, onSubmit }) {
+export function Wrapper() {
   return (
     <>
-      <div className="user-1-window">
-        <Window messages={messages} onSubmit={onSubmit} user="userOne" />
+      <div className="window userOne">
+        <Window user="window__userOne" />
       </div>
-      <div className="user-2-window">
-        <Window messages={messages} onSubmit={onSubmit} user="userTwo" />
+      <div className="window userTwo">
+        <Window user="window__userTwo" />
       </div>
     </>
   );
