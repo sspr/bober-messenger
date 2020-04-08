@@ -1,32 +1,25 @@
-import React from 'react';
+import React, { useReducer } from 'react';
 
 export const MessagesContext = React.createContext({
   messages: [],
   handleSubmit: () => {},
 });
 
-export class MessagesProvider extends React.Component {
-  handleSubmit = (name, message) => {
-    if (message) {
-      const messages = [...this.state.messages];
+function reducer(state, action) {
+  const messages = [...state];
 
-      messages.push({ user: name, message });
-      this.setState({ messages });
-    }
-  };
+  messages.push({ user: action.user, message: action.message });
+  return messages;
+}
 
-  state = {
-    messages: [],
-    handleSubmit: this.handleSubmit,
-  };
+export function MessagesProvider(props) {
+  const [state, dispatch] = useReducer(reducer, []);
 
-  render() {
-    return (
-      <div className="messenger">
-        <MessagesContext.Provider value={this.state}>
-          {this.props.children}
-        </MessagesContext.Provider>
-      </div>
-    );
-  }
+  return (
+    <div className="messenger">
+      <MessagesContext.Provider value={{ messages: state, handleSubmit: dispatch }}>
+        {props.children}
+      </MessagesContext.Provider>
+    </div>
+  );
 }

@@ -1,49 +1,47 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
 import { MessagesContext } from './MessagesContext';
 
-class Window extends React.Component {
-  state = {
-    text: '',
+function Window(props) {
+  const [text, setText] = useState('');
+  const messages = useContext(MessagesContext);
+
+  const handleSubmit = () => {
+    if (text) {
+      messages.handleSubmit({ user: props.user, message: text });
+      setText('');
+    }
   };
 
-  handlePress = () => {
-    this.context.handleSubmit(this.props.user, this.state.text);
-    this.setState({ text: '' });
-  };
-
-  renderMessages = () =>
-    this.context.messages.map((message, index) => (
+  const renderMessages = () =>
+    messages.messages.map((message, index) => (
       <p key={index} className={message.user}>
         {message.message}
       </p>
     ));
 
-  handleChange = ({ target: { value } }) => {
-    this.setState({ text: value });
+  const handleChange = ({ target: { value } }) => {
+    setText(value);
   };
 
-  handleEnterUp = event => {
-    if (event.keyCode === 13) this.handlePress(event);
+  const handleEnterUp = (event) => {
+    if (event.keyCode === 13) handleSubmit();
   };
 
-  render() {
-    return (
-      <div className="messages">
-        <div className="messages__window">{this.renderMessages()}</div>
-        <div className="messages__form">
-          <input
-            className="messages__form--text"
-            type="text"
-            value={this.state.text}
-            onChange={this.handleChange}
-            onKeyUp={this.handleEnterUp}
-          />
-          <input className="messages__form--submit" type="submit" onClick={this.handlePress} />
-        </div>
+  return (
+    <div className="messages">
+      <div className="messages__window">{renderMessages()}</div>
+      <div className="messages__form">
+        <input
+          className="messages__form--text"
+          type="text"
+          value={text}
+          onChange={handleChange}
+          onKeyUp={handleEnterUp}
+        />
+        <input className="messages__form--submit" type="submit" onClick={handleSubmit} />
       </div>
-    );
-  }
+    </div>
+  );
 }
-Window.contextType = MessagesContext;
 
 export default Window;
