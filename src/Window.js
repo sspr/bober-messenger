@@ -1,44 +1,40 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
+import { MessagesContext } from './MessagesContext';
+import classNames from 'classnames';
 
-class Window extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      text: '',
-    };
-  }
+function Window(props) {
+  const [text, setText] = useState('');
+  const { messages, addMessage } = useContext(MessagesContext);
 
-  handlePress = event => {
-    this.props.onSubmit(this.props.user, this.state.text);
-    this.setState({ text: '' });
+  const handleSubmit = () => {
+    if (text) {
+      addMessage({ user: props.user, message: text });
+      setText('');
+    }
   };
 
-  renderMessages = () =>
-    this.props.messages.map((message, index) => (
-      <p key={index} className={message.user}>
+  const renderMessages = () =>
+    messages.map((message, index) => (
+      <p key={index} className={ classNames({'left' : props.user === message.user, 'right': !(props.user === message.user)})}>
         {message.message}
       </p>
     ));
 
-  handleChange = ({ target: { value } }) => {
-    this.setState({ text: value });
-  };
-
-  handleEnterUp = event => {
-    if (event.keyCode === 13) this.handlePress(event);
-  };
-
-  render() {
-    return (
-      <div>
-        <div className="messages-window">{this.renderMessages()}</div>
-        <div className="user-form">
-          <input type="text" value={this.state.text} onChange={this.handleChange} onKeyUp={this.handleEnterUp} />
-          <input type="submit" onClick={this.handlePress} />
-        </div>
+  return (
+    <div className="window">
+      <div className="window__messages">{renderMessages()}</div>
+      <div className="window__form">
+        <input
+          className="window__form--text"
+          type="text"
+          value={text}
+          onChange={({ target: { value } }) => setText(value)}
+          onKeyUp={(event) => (event.keyCode === 13 ? handleSubmit() : null)}
+        />
+        <input className="window__form--submit" type="submit" onClick={handleSubmit} />
       </div>
-    );
-  }
+    </div>
+  );
 }
 
 export default Window;

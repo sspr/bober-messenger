@@ -1,62 +1,51 @@
-body {
-  margin: 2vh;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+.messenger {
+  margin: 1vh 1vw;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',
+    'Droid Sans', 'Helvetica Neue', sans-serif;
+  display: flex;
+  width: 96vw;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
-}
-
-.messages-window{
-  min-height: 92vh;
-}
-
-.user-1-window {
-  width: 45%;
-  padding-right: 5%;
+.window {
+  width: calc(45% - 0.5px);
   display: inline-block;
 }
 
-.user-2-window {
-  box-sizing: border-box;
-  width: 45%;
-  padding-left: 5%;
-  display: inline-block;
+.divider {
+  margin: 0 5%;
+  height: 100%;
   border-left: 1px solid #000;
+  display: inline-block;
 }
 
-.user-form{
+.left {
+  text-align: left;
+}
+
+.right {
+  text-align: right;
+}
+
+.left,
+.right {
+  margin-top: 0;
+}
+
+.window__messages {
+  min-height: 91vh;
+}
+
+.window__form {
   box-sizing: border-box;
   min-height: 2vh;
 }
 
-.user-form input[type="text"]{
+.window__form--text {
   width: 80%;
   box-sizing: border-box;
 }
 
-.user-form input[type="submit"]{
+.window__form--submit {
   width: 20%;
   box-sizing: border-box;
-}
-
-.userOne {
-  text-align: left;
-}
-
-.userTwo {
-  text-align: right;
-}
-
-.user-2-window .userOne{
-  text-align: right;
-}
-
-.user-2-window .userTwo{
-  text-align: left;
 }
