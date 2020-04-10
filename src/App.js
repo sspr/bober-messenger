@@ -1,13 +1,13 @@
 import React from 'react';
 import { Wrapper } from './Wrapper';
-import { MessagesProvider } from './MessagesContext';
+import { MessagesContextProvider } from './messagesContext/MessagesContextProvider';
 
 function App() {
   return (
     <div className="messenger">
-      <MessagesProvider>
+      <MessagesContextProvider>
         <Wrapper />
-      </MessagesProvider>
+      </MessagesContextProvider>
     </div>
   );
 }

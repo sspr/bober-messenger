@@ -18,16 +18,16 @@
   display: inline-block;
 }
 
-.left {
+.window__message--left {
   text-align: left;
 }
 
-.right {
+.window__message--right {
   text-align: right;
 }
 
-.left,
-.right {
+.window__message--left,
+.window__message--right {
   margin-top: 0;
 }
 
@@ -40,12 +40,12 @@
   min-height: 2vh;
 }
 
-.window__form--text {
+.window__form-text {
   width: 80%;
   box-sizing: border-box;
 }
 
-.window__form--submit {
+.window__form-submit {
   width: 20%;
   box-sizing: border-box;
 }
