@@ -2,14 +2,11 @@ import React, { useReducer } from 'react';
 
 export const MessagesContext = React.createContext({
   messages: [],
-  handleSubmit: () => {},
+  addMessage: () => { },
 });
 
-function reducer(state, action) {
-  const messages = [...state];
-
-  messages.push({ user: action.user, message: action.message });
-  return messages;
+function reducer(messages, { user, message }) {
+  return [...messages, { user, message }];
 }
 
 export function MessagesProvider(props) {
@@ -17,7 +14,7 @@ export function MessagesProvider(props) {
 
   return (
     <div className="messenger">
-      <MessagesContext.Provider value={{ messages: state, handleSubmit: dispatch }}>
+      <MessagesContext.Provider value={{ messages: state, addMessage: dispatch }}>
         {props.children}
       </MessagesContext.Provider>
     </div>

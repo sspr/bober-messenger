@@ -1,44 +1,37 @@
 import React, { useState, useContext } from 'react';
 import { MessagesContext } from './MessagesContext';
+import classNames from 'classnames';
 
 function Window(props) {
   const [text, setText] = useState('');
-  const messages = useContext(MessagesContext);
+  const { messages, addMessage } = useContext(MessagesContext);
 
   const handleSubmit = () => {
     if (text) {
-      messages.handleSubmit({ user: props.user, message: text });
+      addMessage({ user: props.user, message: text });
       setText('');
     }
   };
 
   const renderMessages = () =>
-    messages.messages.map((message, index) => (
-      <p key={index} className={message.user}>
+    messages.map((message, index) => (
+      <p key={index} className={ classNames({'left' : props.user === message.user, 'right': !(props.user === message.user)})}>
         {message.message}
       </p>
     ));
 
-  const handleChange = ({ target: { value } }) => {
-    setText(value);
-  };
-
-  const handleEnterUp = (event) => {
-    if (event.keyCode === 13) handleSubmit();
-  };
-
   return (
-    <div className="messages">
-      <div className="messages__window">{renderMessages()}</div>
-      <div className="messages__form">
+    <div className="window">
+      <div className="window__messages">{renderMessages()}</div>
+      <div className="window__form">
         <input
-          className="messages__form--text"
+          className="window__form--text"
           type="text"
           value={text}
-          onChange={handleChange}
-          onKeyUp={handleEnterUp}
+          onChange={({ target: { value } }) => setText(value)}
+          onKeyUp={(event) => (event.keyCode === 13 ? handleSubmit() : null)}
         />
-        <input className="messages__form--submit" type="submit" onClick={handleSubmit} />
+        <input className="window__form--submit" type="submit" onClick={handleSubmit} />
       </div>
     </div>
   );
